@@ -1,0 +1,66 @@
+﻿<Page x:Class="GreatMedic.pages.AppointmentsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:GreatMedic.pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AppointmentsPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="330"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <DataGrid x:Name="dgAppointments" Background="#9fbec6" Margin="10" BorderBrush="#18233D" BorderThickness="3" AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Код_приема}" Header="Код приема"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Код_врача}" Header="Код врача"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Код_пациента}" Header="Код пациента"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Дата_приема}" Header="Дата приема" Width="120"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Стоимость_приема}" Header="Стоимость" Width="100"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Зарплата}" Header="Зарплата" Width="80"></DataGridTextColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Background="LightGreen" Content="Edit" Width="50"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="Delete" Background="#e15b5b" Content="Delete" Width="50"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <StackPanel Width="130">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource CustomFont}" Margin="70, 0, 0, 0" Text="Date" FontSize="16"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Width="120">
+                <DatePicker Margin="0, -5, 0, 0"/>
+            </StackPanel>
+            <StackPanel Width="120">
+                <TextBlock Style="{StaticResource CustomFont}" Margin="60, 0, 0, 0" Text="price" FontSize="16"/>
+            </StackPanel>
+            <StackPanel Width="120">
+                <Slider x:Name="sldPrice" Value="{Binding ElementName=ViewValue, Path=Text}" TickFrequency="1" IsSnapToTickEnabled="True" Minimum="0" Maximum="5000"></Slider>
+                <TextBox x:Name="ViewValue" Text="{Binding ElementName=sldPrice, Path=Value}" Foreground="Gray" Margin="10" HorizontalAlignment="Left" Width="60"/>
+            </StackPanel>
+            <StackPanel Width="120" Orientation="Horizontal">
+                <Button Click="OpenAppAdd" VerticalAlignment="Top" Margin="10, 0, 0, 0" Height="45" Width="45" Background="LightGreen">
+                    <Image Margin="5" Source="/Resources/Images/Add.png"/>
+                </Button>
+                <Button VerticalAlignment="Top" Click="Update" Margin="0, 0, 0, 0" Height="45" Width="45" Background="SkyBlue">
+                    <Image Margin="2" Source="/Resources/Images/update.png"/>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

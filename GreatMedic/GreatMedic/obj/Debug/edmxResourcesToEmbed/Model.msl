@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище ПоликлиникаModelContainer" CdmEntityContainer="MedEntities">
+    <EntitySetMapping Name="Clients">
+      <EntityTypeMapping TypeName="ПоликлиникаModel.Clients">
+        <MappingFragment StoreEntitySet="Clients">
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Root" ColumnName="Root" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Врачи">
+      <EntityTypeMapping TypeName="ПоликлиникаModel.Врачи">
+        <MappingFragment StoreEntitySet="Врачи">
+          <ScalarProperty Name="Код_врача" ColumnName="Код врача" />
+          <ScalarProperty Name="Фамилия_врача" ColumnName="Фамилия врача" />
+          <ScalarProperty Name="Имя_врача" ColumnName="Имя врача" />
+          <ScalarProperty Name="Отчество_врача" ColumnName="Отчество врача" />
+          <ScalarProperty Name="Специальность_врача" ColumnName="Специальность врача" />
+          <ScalarProperty Name="Процент" ColumnName="Процент" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Пациенты">
+      <EntityTypeMapping TypeName="ПоликлиникаModel.Пациенты">
+        <MappingFragment StoreEntitySet="Пациенты">
+          <ScalarProperty Name="Код_пациента" ColumnName="Код пациента" />
+          <ScalarProperty Name="Фамилия_пациента" ColumnName="Фамилия пациента" />
+          <ScalarProperty Name="Имя_пациента" ColumnName="Имя пациента" />
+          <ScalarProperty Name="Отчество_пациента" ColumnName="Отчество пациента" />
+          <ScalarProperty Name="Дата_рождения_пациента" ColumnName="Дата рождения пациента" />
+          <ScalarProperty Name="Адрес" ColumnName="Адрес" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Прием_пациентов">
+      <EntityTypeMapping TypeName="ПоликлиникаModel.Прием_пациентов">
+        <MappingFragment StoreEntitySet="Прием_пациентов">
+          <ScalarProperty Name="Код_приема" ColumnName="Код приема" />
+          <ScalarProperty Name="Код_врача" ColumnName="Код врача" />
+          <ScalarProperty Name="Код_пациента" ColumnName="Код пациента" />
+          <ScalarProperty Name="Дата_приема" ColumnName="Дата приема" />
+          <ScalarProperty Name="Стоимость_приема" ColumnName="Стоимость приема" />
+          <ScalarProperty Name="Зарплата" ColumnName="Зарплата" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

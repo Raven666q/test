@@ -1,0 +1,49 @@
+﻿<Window x:Class="GreatMedic.MedicWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GreatMedic"
+        mc:Ignorable="d"
+        Title="Medical Center" x:Name="MedCenter" Background="#5885A2" Height="550" Width="800" ResizeMode="NoResize" Icon="/Resources/Images/tf/Icon.png">
+    <Grid x:Name="MainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <StackPanel Width="100">
+                <Image Height="95" Source="/Resources/Images/tf/Rofl/Admin.png"/>
+            </StackPanel>
+            <StackPanel Width="300">
+                <TextBlock x:Name="Login" Margin="0, 10, 0, 0" FontSize="22" Text="" Style="{StaticResource CustomFont}"/>
+                <TextBlock x:Name="Role" Foreground="#8650AC" Margin="0, 10, 0, 0" FontSize="22" Text="" Style="{StaticResource CustomFont}"/>
+            </StackPanel>
+            <StackPanel Visibility="Visible" x:Name="Settings" Width="300" Orientation="Horizontal">
+                <StackPanel Width="100">
+                    <TextBlock Style="{StaticResource CustomFont}" FontSize="18" Margin="10" Text="Theme"/>
+                </StackPanel>
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Click="ChangeThemeTF" Background="#256D8D" Width="20" Height="20" Margin="5, 10, 0 ,0"/>
+                        <Button Click="ChangeThemeBiscuit" Background="#C36C2D" Width="20" Height="20" Margin="5, 10, 0 ,0"/>
+                        <Button Click="ChangeThemeDark" Background="#7E7E7E" Width="20" Height="20" Margin="5, 10, 0 ,0"/>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+            <Image Width="70" Height="70" Source="/Resources/Images/tf/Class Emblems/EngiEmblem.png" Margin="10, 0, 0, 0"></Image>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <StackPanel Width="150">
+                <Button x:Name="btnOpenDoctors" Click="ToDoctors" Margin="10, 30, 10, 10" Content="Doctors" Style="{StaticResource CustomFont}" FontSize="18" Height="30" Background="#256D8D"/>
+                <Button x:Name="btnOpenPatients" Click="ToPatients" Margin="10" Content="Patients" Style="{StaticResource CustomFont}" FontSize="18" Height="30" Background="#256D8D"/>
+                <Button x:Name="btnOpenAppointments" Click="ToAppointments" Margin="10" Content="Appointments" Style="{StaticResource CustomFont}" FontSize="18" Height="30" Background="#256D8D"/>
+                <Button x:Name="btnReport" Margin="10" Content="Report" Style="{StaticResource CustomFont}" FontSize="18" Height="30" Background="#256D8D"/>
+                <Button x:Name="btnRegister" Visibility="Hidden" Click="ToReg" Margin="10" Content="Reg new client" Style="{StaticResource CustomFont}" FontSize="18" Height="30" Background="#256D8D"/>
+            </StackPanel>
+            <StackPanel>
+                <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Width="630"></Frame>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище ПоликлиникаModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="Login" />
+          </Key>
+          <Property Name="Login" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="30" />
+          <Property Name="Root" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Врачи">
+          <Key>
+            <PropertyRef Name="Код врача" />
+          </Key>
+          <Property Name="Код врача" Type="int" Nullable="false" />
+          <Property Name="Фамилия врача" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Имя врача" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Отчество врача" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Специальность врача" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Процент" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Пациенты">
+          <Key>
+            <PropertyRef Name="Код пациента" />
+          </Key>
+          <Property Name="Код пациента" Type="int" Nullable="false" />
+          <Property Name="Фамилия пациента" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Имя пациента" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Отчество пациента" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Дата рождения пациента" Type="date" Nullable="false" />
+          <Property Name="Адрес" Type="nvarchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Прием_пациентов">
+          <Key>
+            <PropertyRef Name="Код приема" />
+          </Key>
+          <Property Name="Код приема" Type="int" Nullable="false" />
+          <Property Name="Код врача" Type="int" Nullable="false" />
+          <Property Name="Код пациента" Type="int" Nullable="false" />
+          <Property Name="Дата приема" Type="date" Nullable="false" />
+          <Property Name="Стоимость приема" Type="money" Nullable="false" />
+          <Property Name="Зарплата" Type="real" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <Association Name="FK__Прием_пац__Код в__15502E78">
+          <End Role="Врачи" Type="Self.Врачи" Multiplicity="1" />
+          <End Role="Прием_пациентов" Type="Self.Прием_пациентов" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Врачи">
+              <PropertyRef Name="Код врача" />
+            </Principal>
+            <Dependent Role="Прием_пациентов">
+              <PropertyRef Name="Код врача" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Прием_пац__Код п__164452B1">
+          <End Role="Пациенты" Type="Self.Пациенты" Multiplicity="1" />
+          <End Role="Прием_пациентов" Type="Self.Прием_пациентов" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Пациенты">
+              <PropertyRef Name="Код пациента" />
+            </Principal>
+            <Dependent Role="Прием_пациентов">
+              <PropertyRef Name="Код пациента" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ПоликлиникаModelContainer">
+          <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Врачи" EntityType="Self.Врачи" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Пациенты" EntityType="Self.Пациенты" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Прием_пациентов" EntityType="Self.Прием_пациентов" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Прием_пац__Код в__15502E78" Association="Self.FK__Прием_пац__Код в__15502E78">
+            <End Role="Врачи" EntitySet="Врачи" />
+            <End Role="Прием_пациентов" EntitySet="Прием_пациентов" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Прием_пац__Код п__164452B1" Association="Self.FK__Прием_пац__Код п__164452B1">
+            <End Role="Пациенты" EntitySet="Пациенты" />
+            <End Role="Прием_пациентов" EntitySet="Прием_пациентов" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ПоликлиникаModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="Login" />
+          </Key>
+          <Property Name="Login" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Root" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Врачи">
+          <Key>
+            <PropertyRef Name="Код_врача" />
+          </Key>
+          <Property Name="Код_врача" Type="Int32" Nullable="false" />
+          <Property Name="Фамилия_врача" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Имя_врача" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Отчество_врача" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Специальность_врача" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Процент" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Прием_пациентов" Relationship="Self.FK__Прием_пац__Код_в__15502E78" FromRole="Врачи" ToRole="Прием_пациентов" />
+        </EntityType>
+        <EntityType Name="Пациенты">
+          <Key>
+            <PropertyRef Name="Код_пациента" />
+          </Key>
+          <Property Name="Код_пациента" Type="Int32" Nullable="false" />
+          <Property Name="Фамилия_пациента" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Имя_пациента" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Отчество_пациента" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Дата_рождения_пациента" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Адрес" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Прием_пациентов" Relationship="Self.FK__Прием_пац__Код_п__164452B1" FromRole="Пациенты" ToRole="Прием_пациентов" />
+        </EntityType>
+        <EntityType Name="Прием_пациентов">
+          <Key>
+            <PropertyRef Name="Код_приема" />
+          </Key>
+          <Property Name="Код_приема" Type="Int32" Nullable="false" />
+          <Property Name="Код_врача" Type="Int32" Nullable="false" />
+          <Property Name="Код_пациента" Type="Int32" Nullable="false" />
+          <Property Name="Дата_приема" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Стоимость_приема" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Зарплата" Type="Single" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Врачи" Relationship="Self.FK__Прием_пац__Код_в__15502E78" FromRole="Прием_пациентов" ToRole="Врачи" />
+          <NavigationProperty Name="Пациенты" Relationship="Self.FK__Прием_пац__Код_п__164452B1" FromRole="Прием_пациентов" ToRole="Пациенты" />
+        </EntityType>
+        <Association Name="FK__Прием_пац__Код_в__15502E78">
+          <End Role="Врачи" Type="Self.Врачи" Multiplicity="1" />
+          <End Role="Прием_пациентов" Type="Self.Прием_пациентов" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Врачи">
+              <PropertyRef Name="Код_врача" />
+            </Principal>
+            <Dependent Role="Прием_пациентов">
+              <PropertyRef Name="Код_врача" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Прием_пац__Код_п__164452B1">
+          <End Role="Пациенты" Type="Self.Пациенты" Multiplicity="1" />
+          <End Role="Прием_пациентов" Type="Self.Прием_пациентов" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Пациенты">
+              <PropertyRef Name="Код_пациента" />
+            </Principal>
+            <Dependent Role="Прием_пациентов">
+              <PropertyRef Name="Код_пациента" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MedEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Clients" EntityType="Self.Clients" />
+          <EntitySet Name="Врачи" EntityType="Self.Врачи" />
+          <EntitySet Name="Пациенты" EntityType="Self.Пациенты" />
+          <EntitySet Name="Прием_пациентов" EntityType="Self.Прием_пациентов" />
+          <AssociationSet Name="FK__Прием_пац__Код_в__15502E78" Association="Self.FK__Прием_пац__Код_в__15502E78">
+            <End Role="Врачи" EntitySet="Врачи" />
+            <End Role="Прием_пациентов" EntitySet="Прием_пациентов" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Прием_пац__Код_п__164452B1" Association="Self.FK__Прием_пац__Код_п__164452B1">
+            <End Role="Пациенты" EntitySet="Пациенты" />
+            <End Role="Прием_пациентов" EntitySet="Прием_пациентов" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ПоликлиникаModelContainer" CdmEntityContainer="MedEntities">
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="ПоликлиникаModel.Clients">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Root" ColumnName="Root" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Врачи">
+            <EntityTypeMapping TypeName="ПоликлиникаModel.Врачи">
+              <MappingFragment StoreEntitySet="Врачи">
+                <ScalarProperty Name="Код_врача" ColumnName="Код врача" />
+                <ScalarProperty Name="Фамилия_врача" ColumnName="Фамилия врача" />
+                <ScalarProperty Name="Имя_врача" ColumnName="Имя врача" />
+                <ScalarProperty Name="Отчество_врача" ColumnName="Отчество врача" />
+                <ScalarProperty Name="Специальность_врача" ColumnName="Специальность врача" />
+                <ScalarProperty Name="Процент" ColumnName="Процент" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Пациенты">
+            <EntityTypeMapping TypeName="ПоликлиникаModel.Пациенты">
+              <MappingFragment StoreEntitySet="Пациенты">
+                <ScalarProperty Name="Код_пациента" ColumnName="Код пациента" />
+                <ScalarProperty Name="Фамилия_пациента" ColumnName="Фамилия пациента" />
+                <ScalarProperty Name="Имя_пациента" ColumnName="Имя пациента" />
+                <ScalarProperty Name="Отчество_пациента" ColumnName="Отчество пациента" />
+                <ScalarProperty Name="Дата_рождения_пациента" ColumnName="Дата рождения пациента" />
+                <ScalarProperty Name="Адрес" ColumnName="Адрес" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Прием_пациентов">
+            <EntityTypeMapping TypeName="ПоликлиникаModel.Прием_пациентов">
+              <MappingFragment StoreEntitySet="Прием_пациентов">
+                <ScalarProperty Name="Код_приема" ColumnName="Код приема" />
+                <ScalarProperty Name="Код_врача" ColumnName="Код врача" />
+                <ScalarProperty Name="Код_пациента" ColumnName="Код пациента" />
+                <ScalarProperty Name="Дата_приема" ColumnName="Дата приема" />
+                <ScalarProperty Name="Стоимость_приема" ColumnName="Стоимость приема" />
+                <ScalarProperty Name="Зарплата" ColumnName="Зарплата" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

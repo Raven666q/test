@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ПоликлиникаModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Clients">
+    <Key>
+      <PropertyRef Name="Login" />
+    </Key>
+    <Property Name="Login" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Root" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Врачи">
+    <Key>
+      <PropertyRef Name="Код_врача" />
+    </Key>
+    <Property Name="Код_врача" Type="Int32" Nullable="false" />
+    <Property Name="Фамилия_врача" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Имя_врача" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Отчество_врача" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Специальность_врача" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Процент" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Прием_пациентов" Relationship="Self.FK__Прием_пац__Код_в__15502E78" FromRole="Врачи" ToRole="Прием_пациентов" />
+  </EntityType>
+  <EntityType Name="Пациенты">
+    <Key>
+      <PropertyRef Name="Код_пациента" />
+    </Key>
+    <Property Name="Код_пациента" Type="Int32" Nullable="false" />
+    <Property Name="Фамилия_пациента" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Имя_пациента" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Отчество_пациента" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Дата_рождения_пациента" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Адрес" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Прием_пациентов" Relationship="Self.FK__Прием_пац__Код_п__164452B1" FromRole="Пациенты" ToRole="Прием_пациентов" />
+  </EntityType>
+  <EntityType Name="Прием_пациентов">
+    <Key>
+      <PropertyRef Name="Код_приема" />
+    </Key>
+    <Property Name="Код_приема" Type="Int32" Nullable="false" />
+    <Property Name="Код_врача" Type="Int32" Nullable="false" />
+    <Property Name="Код_пациента" Type="Int32" Nullable="false" />
+    <Property Name="Дата_приема" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Стоимость_приема" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Зарплата" Type="Single" annotation:StoreGeneratedPattern="Computed" />
+    <NavigationProperty Name="Врачи" Relationship="Self.FK__Прием_пац__Код_в__15502E78" FromRole="Прием_пациентов" ToRole="Врачи" />
+    <NavigationProperty Name="Пациенты" Relationship="Self.FK__Прием_пац__Код_п__164452B1" FromRole="Прием_пациентов" ToRole="Пациенты" />
+  </EntityType>
+  <Association Name="FK__Прием_пац__Код_в__15502E78">
+    <End Role="Врачи" Type="Self.Врачи" Multiplicity="1" />
+    <End Role="Прием_пациентов" Type="Self.Прием_пациентов" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Врачи">
+        <PropertyRef Name="Код_врача" />
+      </Principal>
+      <Dependent Role="Прием_пациентов">
+        <PropertyRef Name="Код_врача" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Прием_пац__Код_п__164452B1">
+    <End Role="Пациенты" Type="Self.Пациенты" Multiplicity="1" />
+    <End Role="Прием_пациентов" Type="Self.Прием_пациентов" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Пациенты">
+        <PropertyRef Name="Код_пациента" />
+      </Principal>
+      <Dependent Role="Прием_пациентов">
+        <PropertyRef Name="Код_пациента" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MedEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Clients" EntityType="Self.Clients" />
+    <EntitySet Name="Врачи" EntityType="Self.Врачи" />
+    <EntitySet Name="Пациенты" EntityType="Self.Пациенты" />
+    <EntitySet Name="Прием_пациентов" EntityType="Self.Прием_пациентов" />
+    <AssociationSet Name="FK__Прием_пац__Код_в__15502E78" Association="Self.FK__Прием_пац__Код_в__15502E78">
+      <End Role="Врачи" EntitySet="Врачи" />
+      <End Role="Прием_пациентов" EntitySet="Прием_пациентов" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Прием_пац__Код_п__164452B1" Association="Self.FK__Прием_пац__Код_п__164452B1">
+      <End Role="Пациенты" EntitySet="Пациенты" />
+      <End Role="Прием_пациентов" EntitySet="Прием_пациентов" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
